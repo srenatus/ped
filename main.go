@@ -25,6 +25,9 @@ func main() {
 
 func run(name string, args ...string) {
 	cmd := exec.Command(name, append(args, os.Args[1:]...)...)
+	cmd.Stdin = os.Stdin
+	cmd.Stdout = os.Stdout
+	cmd.Stderr = os.Stderr
 	if err := cmd.Run(); err != nil {
 		log.Fatalf("%s: %s", cmd.String(), err)
 	}
